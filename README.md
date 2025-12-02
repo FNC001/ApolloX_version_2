@@ -103,6 +103,18 @@ Quantitatively, we assess the accuracy of ApolloX-generated structures by comput
 
 These validation studies demonstrate that ApolloX can serve as a reliable tool for generating physically plausible amorphous structures in complex multi-element systems. The ability to control SRO via PDM constraints and to optimize configurations via PSO in latent space distinguishes ApolloX from purely data-driven generative models that lack explicit physical guidance. This capability is particularly important for high-entropy amorphous materials, where subtle changes in SRO can have pronounced effects on properties such as diffusion, mechanical response, and catalytic activity.
 
+![picture](https://github.com/gyf712/apollox_2_figs/blob/main/fig2.png?raw=true)
+
+FIG. 2. Model prediction of structural energy distribution and analysis. (A) Target pair-distribution matrix (PDM)
+and the relative deviation of generated structures, demonstrating the model’s ability to capture short-range ordering with
+high fidelity. (B) Histogram of the mean relative PDM errors. Inset: diversity metrics—uniqueness, coverage recall, and
+coverage precision—plotted as functions of the similarity threshold δ. (C) Particle-swarm optimisation (PSO) trajectory;
+the minimum-energy structure appears in the third generation, and one representative thermodynamically stable structure
+is shown. (D) Energy distributions of structures produced by Random, ApolloX, SQS, and MC methods. The bar chart
+highlights the greater abundance of ApolloX structures in the low-energy regime. Inset: violin plot of the global mean energy
+and the distribution within the window −1050 to −990 eV. (E) The five lowest-energy structures obtained with ApolloX; their
+PDMs (inset) exhibit a characteristic short-range-ordering motif.
+
 ### C. Boron-driven structural evolution and ordering
 
 We now apply ApolloX to the FeCoNiMoBOx system, focusing on how boron content influences structural evolution, SRO, and amorphization. Boron is known to be a potent glass former in oxide systems, with B2O3 being one of the most difficult substances to crystallize in nature [35]. In multi-element oxide and oxyhydroxide systems, boron can form BO3 and BO4 units that connect into extended networks, influencing both local coordination environments and medium-range connectivity.
@@ -113,6 +125,22 @@ Our simulations reveal that increasing B content drives the formation of B-rich 
 
 The PDM analysis shows a clear trend in pairwise coordination statistics: B–O coordination increases with B content, while certain metal–metal and metal–oxygen pairings exhibit reduced probabilities, reflecting the structural role of B in redistributing local bonding environments. These changes in SRO correlate with shifts in local density, bond-length distributions, and angular distributions, all of which can be quantified within the PDM framework. Importantly, the ApolloX-generated structures capture these trends in a compositionally continuous manner, allowing us to trace the boron-driven structural evolution across the composition space.
 
+
+![picture](https://github.com/gyf712/apollox_2_figs/blob/main/fig3.png?raw=true)
+
+FIG. 3. Short-range order evolution and diffusion-limited amorphization mechanism. (A) Heatmap from theoretical
+modeling illustrating atomic nearest-neighbor statistics for structures with three different boron concentrations. (B) Atomic
+configuration models show that higher boron content promotes the formation of short-range ordered B–O bonds, accompanied
+by metal clustering. (C) Comparison of diffusion coefficients for metals, and boron within the same system reveals that boron
+diffuses significantly more slowly than metals. Molecular dynamics simulations were performed under a slow heating ramp from
+300 K to 2050 K over a total duration of 24 ps. (D) With increasing boron content, the formation of BO<sub>3</sub> motifs becomes more
+prominent, reducing atomic mobility, hindering lattice rearrangement, and favoring amorphization. (E) Temperature-dependent
+total radial distribution functions g(r) for the high-boron and low-boron groups, showing distinct structural evolution. (F)
+Time-resolved atomic snapshots of the high-boron system depicting the dynamic evolution of BO<sub>3</sub> clusters. At 10 ps, isolated
+BO<sub>3</sub> triangles begin to emerge. By 15 ps, a percolating BO<sub>3</sub> network forms, corresponding to a structurally arrested state. At
+20 ps, thermal agitation induces partial fragmentation, followed by extensive dissociation of the network at 24 ps.
+
+
 ### D. Diffusion-limited amorphization mechanism
 
 In addition to static structural descriptors, ApolloX-based configurations can be used as starting points for MD simulations to probe dynamical behavior and diffusion processes in the amorphous FeCoNiMoBOx system. We perform *ab initio* or MLIP-accelerated MD simulations on selected configurations with varying B content, analyzing atomic diffusion coefficients, mean squared displacements, and time-dependent RDFs.
@@ -120,6 +148,25 @@ In addition to static structural descriptors, ApolloX-based configurations can b
 We find that increasing B content leads to a pronounced slowing of atomic diffusion, particularly for the transition metals. The formation of B-rich oxide networks introduces energetic barriers and steric constraints that hinder long-range atomic motion, effectively trapping atoms within locally constrained environments. This diffusion-limited kinetics contributes to amorphization by preventing the system from reorganizing into a crystalline lattice during cooling or annealing. Instead, the system becomes kinetically arrested in a disordered state with well-developed SRO and B-mediated connectivity.
 
 The diffusion-limited amorphization mechanism elucidated by our simulations provides a microscopic explanation for the observed correlation between B content, structural disorder, and amorphization propensity. It also suggests strategies for designing other amorphous multi-element systems by tuning network-forming species and their interactions with the surrounding matrix.
+
+![picture](https://github.com/gyf712/apollox_2_figs/blob/main/fig4.jpg?raw=true)
+
+FIG. 4. Structural characterizations of three samples with varying boron contents. (A–C) AC-HAADF-STEM
+images show disordered atomic distribution without periodic crystal lattice. (D–F) HAADF-STEM images show irregular
+morphology. (G–I) Corresponding EDS mapping displays homogeneous distribution of Fe, Co, Ni, Mo elements across the
+samples.
+
+![picture](https://github.com/gyf712/apollox_2_figs/blob/main/fig5.png?raw=true)
+
+FIG. 5. Structural characterization of FeCoNiMoBOx samples with varying boron contents. (A) X-ray diffrac-
+tion (XRD) patterns of Group-1, Group-2, and Group-3 samples, showing the disappearance of long-range diffraction peaks
+and progressive amorphization with increasing boron content. (B) Experimental pair distribution functions (G(r)) revealing
+changes in local atomic ordering. (C) Short-range G(r) curves highlighting the relative intensities of M–O, M–M, and M–O–M
+correlations for each group. (D) Fourier-transformed EXAFS fitting curves at the R-space of the Co K-edge, showing a decrease
+in Co–O coordination and an increase in Co–M interactions as boron content increases. The data shown here are without phase
+correction; phase-corrected results are provided in the Supplementary Fig. 19. (E) Wavelet-transform EXAFS (WT-EXAFS)
+contour plots of Co foil, Co3O4, and the three sample groups, where the shift from Co–O–Co to Co–M scattering paths with
+higher boron levels is evident.
 
 ## III. Conclusions
 
