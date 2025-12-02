@@ -81,6 +81,18 @@ This physics-guided generative process allows ApolloX to efficiently explore the
 
 The final output of the PSO-guided generative process is a set of candidate amorphous structures that exhibit distinct SRO motifs and low formation energies. These configurations can be further refined using DFT relaxation and MD simulations to assess their stability, dynamical behavior, and response to external conditions. The PDM and associated structural descriptors extracted from these configurations can also be used to build structure–property relationships, linking specific SRO patterns to macroscopic observables such as diffusivity, mechanical rigidity, and catalytic activity.
 
+![picture](https://github.com/gyf712/apollox_2_figs/blob/main/fig1.png?raw=true)
+
+FIG. 1. Overview workflow of ApolloX. (A) Main workflow of ApolloX for structural modeling, including the model’s
+iterative generation process. (B) Structures are represented using the Pair Density Matrix (PDM), and a dataset is constructed
+by mapping each structure to its corresponding PDM. (C) The model architecture of the Cond-CDVAE. An embedding network
+(EMB) integrates a structure’s composition (Comp.) and PDM into a unified conditioning vector. The graph neural network
+encoder (PGNNA<sub>Enc</sub>) encodes the structure alongside its conditioning vector into a latent vector, capturing its underlying
+features. Subsequently, a multi-layer perceptron MLPL predicts the lattice parameters based on the latent vector. And the
+graph neural network decoder (PGNN<sub>Dec</sub>) outputs a score function for denoising and reconstruction of a plausible structure.
+(D) Enthalpy stability is evaluated using the convex hull method, and entropy stability is assessed based on configurational
+entropy. (E) PSO is employed to optimize the PDM, using the PYSWARMS package.
+
 ### B. Validating ApolloX for amorphous materials discovery
 
 To validate ApolloX as a general framework for amorphous materials design, we apply it to a set of model systems with varying degrees of structural complexity and chemical heterogeneity. These include simple binary and ternary oxide glasses, metallic glasses, and multi-element ceramic systems with known amorphization tendencies. For each system, we compare ApolloX-generated structures with reference configurations obtained from conventional melt-quench MD simulations and experimental structural data (e.g., RDFs, PDFs, EXAFS).
