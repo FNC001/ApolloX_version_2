@@ -169,10 +169,8 @@ This work represents a paradigm shift in the computational design of amorphous m
 ### A. Pair-Density Matrix (PDM) descriptor
 
 To encode CSRO in the Cond-CDVAE framework both efficiently and without bias, we introduced the PDM as the primary structural descriptor. The PDM counts the number of near-neighbour atomic pairs for each element-element combination within a specified cutoff radius and arranges these counts in a K × K matrix, where K denotes the number of distinct element types. This representation maintains a fixed dimensionality regardless of composition while fully capturing local chemical environments. The PDM is formally defined in Equation (1):
-$$
-\text{PDM}_{\alpha\beta}(r_c) = \sum_{i<j} \Theta(r_c - d_{ij})
-\left[ \delta_{s_i,\alpha}\delta_{s_j,\beta} + \delta_{s_i,\beta}\delta_{s_j,\alpha} \right]
-$$
+$\text{PDM}_{\alpha\beta}(r_c) = \sum_{i<j} \Theta(r_c - d_{ij})(\delta_{s_i,\alpha}\delta_{s_j,\beta} + \delta_{s_i,\beta}\delta_{s_j,\alpha})$
+
 
 
 To capture coordination environments, we also compute coordination number distributions for each species, defining neighbors based on radial cutoffs derived from RDF peaks or known bond-length ranges. The PDM thus includes both global pairwise statistics and local coordination information, providing a rich representation of SRO and, to some extent, MRO. For multi-element systems, we organize the PDM into blocks corresponding to different species pairs (e.g., Fe–O, Co–O, B–O, metal–metal), which can be analyzed individually or collectively.
