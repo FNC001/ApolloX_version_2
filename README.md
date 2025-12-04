@@ -162,17 +162,18 @@ Additionally, beyond the unary FeCoNiMoBOₓ system, we synthesized an expanded 
 
 ## III. Conclusions
 
-This work represents a paradigm shift in the computational design of amorphous multi-element materials. By introducing ApolloX, a physics-guided generative framework that integrates PDM-based structural descriptors, Cond-CDVAE generative modeling, and PSO optimization in latent space, we provide a systematic route to exploring the amorphous energy landscape in high-dimensional composition spaces. ApolloX enables the generation of amorphous structures with tailored SRO and energetics, overcoming longstanding challenges associated with the lack of periodicity and the vast configurational space of amorphous systems.
-
-Applying ApolloX to the FeCoNiMoBOx system, we discover a boron-assisted amorphization route in which B-rich oxide networks stabilize amorphous phases and modulate diffusion dynamics. Our simulations reveal that increasing B content promotes the formation of BO3-centered motifs, slows atomic diffusion, and enhances amorphization. These predictions are validated experimentally through structural characterization and OER catalysis measurements, demonstrating a strong correlation between the degree of amorphization, SRO, and catalytic performance.
-
-Beyond this specific case study, ApolloX offers a general and extendable framework for the design of amorphous materials in catalysis, energy storage, and other applications. By combining generative modeling with physically motivated descriptors and optimization schemes, ApolloX bridges the gap between data-driven methods and traditional physics-based approaches, enabling the rational design of amorphous materials with tunable local order and properties.
+This work represents a paradigm shift in the computational design of amorphous multi-element materials by integrating a physics-guided generative model with PSO algorithm. By encoding CSRO and thermodynamic stability into the generative process, our approach transcends conventional trial-and-error methods, enabling predictive synthesis of complex disordered systems. The ability to rationally design amorphous structures at atomic level with high thermostability was validated through the synthesis and characterization of FeCoNiMoBOₓ, where the predicted amorphization trends, metal clustering effects, and functional enhancements were experimentally confirmed. Moving forward, this framework opens the door to property-driven materials design, where desired functionalities dictate atomic configurations, accelerating the discovery of next-generation materials for catalysis, energy storage, and beyond.
 
 ## IV. Methods
 
 ### A. Pair-Density Matrix (PDM) descriptor
 
-The PDM descriptor provides a compact representation of local bonding environments in amorphous materials. For a given configuration, we define the PDM as a set of pairwise distributions over atomic species, coordination numbers, and bond-length intervals. Specifically, we partition the radial distance range into discrete bins and count the number of pairs of atoms (i, j) with species (α, β) and distances falling into each bin. This yields a multi-dimensional histogram that encodes the statistics of pairwise interactions.
+To encode CSRO in the Cond-CDVAE framework both efficiently and without bias, we introduced the PDM as the primary structural descriptor. The PDM counts the number of near-neighbour atomic pairs for each element-element combination within a specified cutoff radius and arranges these counts in a K × K matrix, where K denotes the number of distinct element types. This representation maintains a fixed dimensionality regardless of composition while fully capturing local chemical environments. The PDM is formally defined in Equation (1):
+$$
+\text{PDM}_{\alpha\beta}(r_c) = \sum_{i<j} \Theta(r_c - d_{ij})
+\left[ \delta_{s_i,\alpha}\delta_{s_j,\beta} + \delta_{s_i,\beta}\delta_{s_j,\alpha} \right]
+$$
+
 
 To capture coordination environments, we also compute coordination number distributions for each species, defining neighbors based on radial cutoffs derived from RDF peaks or known bond-length ranges. The PDM thus includes both global pairwise statistics and local coordination information, providing a rich representation of SRO and, to some extent, MRO. For multi-element systems, we organize the PDM into blocks corresponding to different species pairs (e.g., Fe–O, Co–O, B–O, metal–metal), which can be analyzed individually or collectively.
 
