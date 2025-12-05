@@ -158,7 +158,17 @@ This work represents a paradigm shift in the computational design of amorphous m
 ### A. Pair-Density Matrix (PDM) descriptor
 
 To encode CSRO in the Cond-CDVAE framework both efficiently and without bias, we introduced the PDM as the primary structural descriptor. The PDM counts the number of near-neighbour atomic pairs for each element-element combination within a specified cutoff radius and arranges these counts in a K × K matrix, where K denotes the number of distinct element types. This representation maintains a fixed dimensionality regardless of composition while fully capturing local chemical environments. The PDM is formally defined in Equation (1):
-PDMαβ(rc)=
+
+$$
+\text{PDM}_{\alpha\beta}(r_c)
+= \sum_{i<j} \Theta(r_c - d_{ij})
+\left( 
+\delta_{s_i,\alpha}\,\delta_{s_j,\beta}
++
+\delta_{s_i,\beta}\,\delta_{s_j,\alpha}
+\right).
+$$
+
 
 ### B. Model details of Cond-CDVAE
 
@@ -172,9 +182,18 @@ During the generation stage, the target composition and PDM should be provided. 
 
 To quantify the similarity between PDMs of generated and reference configurations, we define the mean relative error (MRE) as:
 
-MRE = (1/N) Σ_k |P_gen(k) – P_ref(k)| / max(P_ref(k), ε)
+$$
+\mathrm{MRE}
+= \frac{1}{N} \sum_{k}
+\frac{
+\left| P_{\mathrm{gen}}(k) - P_{\mathrm{ref}}(k) \right|
+}{
+\max\left( P_{\mathrm{ref}}(k) \, \varepsilon \right)
+}
+$$
 
-where P_gen(k) and P_ref(k) are the values of the k-th bin in the generated and reference PDMs, respectively, N is the total number of bins, and ε is a small regularization parameter to avoid division by zero. The MRE provides a normalized measure of discrepancy between PDMs, with smaller values indicating closer agreement.
+
+where $P_{\mathrm{gen}}(k)$ and $P_{\mathrm{ref}}(k)$ are the values of the k-th bin in the generated and reference PDMs, respectively, N is the total number of bins, and ε is a small regularization parameter to avoid division by zero. The MRE provides a normalized measure of discrepancy between PDMs, with smaller values indicating closer agreement.
 
 We compute MRE for each species pair and also aggregate over all pairs to obtain a global measure of PDM similarity. In our validation studies, we find that ApolloX-generated structures consistently achieve low MRE values relative to reference configurations obtained from melt-quench MD or experimental structural data, confirming the fidelity of the generative model in capturing SRO.
 
